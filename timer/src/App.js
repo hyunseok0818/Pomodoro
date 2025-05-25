@@ -1,22 +1,16 @@
-import logo from "./logo.svg";
+import React from "react";
+import { Helmet } from "react-helmet";
 import "./App.css";
 
 function App() {
   return (
     <div className="App">
+      <Helmet>
+        <title>365 뽀모도로</title>
+      </Helmet>
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <p className="header-left">365 뽀모도로</p>
+        <p className="mode-toggle">Light | Dark</p>
       </header>
     </div>
   );

@@ -1,0 +1,19 @@
+.App-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  font-family: "GangwonEduPower", sans-serif;
+}
+
+.header-left {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin: 0;
+}
+
+.mode-toggle {
+  font-size: 1rem;
+  cursor: pointer;
+  margin: 0;
+}
