@@ -1,5 +1,6 @@
 import React from "react";
 import "./App.css";
+import Timer from "./timer.js";
 
 function App() {
   return (
@@ -11,7 +12,9 @@ function App() {
       </header>
 
       {/* 타이머 영역 (추후 구현) */}
-      <div className="timer-area"></div>
+      <div className="timer-area">
+        <Timer />
+      </div>
 
       {/* 버튼 그룹 */}
       <div className="buttons">
