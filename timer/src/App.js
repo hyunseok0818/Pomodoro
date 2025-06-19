@@ -6,7 +6,7 @@ function App() {
   const [mode, setMode] = useState("light");
 
   return (
-    <div className={`App ${mode === "dark" ? "dark-mode" : "light-mode"}`}>
+    <div className={mode === "dark" ? "App dark-mode" : "App light-mode"}>
       {/* 헤더 */}
       <header className="header">
         <h1 className="title">365 뽀모도로</h1>
