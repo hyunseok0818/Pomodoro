@@ -24,9 +24,40 @@
 .mode-toggle {
   font-size: 20px;
   font-weight: bold;
-  color: #555;
   margin: 0;
   cursor: pointer;
+}
+
+.light-mode {
+  background-color: white;
+  color: #555;
+}
+
+.dark-mode {
+  background-color: #555;
+  color: white;
+}
+
+.light-mode .title {
+  color: #000;
+}
+
+.dark-mode .title {
+  color: white;
+}
+
+.light-mode .btn {
+  background-color: white;
+  color: #555;
+}
+
+.dark-mode .btn {
+  background-color: #555;
+  color: white;
+}
+
+.dark-mode .btn:hover {
+  background-color: #666;
 }
 
 /* 타이머 영역 */
