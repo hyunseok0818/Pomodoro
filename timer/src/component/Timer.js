@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import "./timer.css";
+import "../timer.css";
 
 function Timer() {
   const TIMES = { work: 25 * 60, rest: 5 * 60 };
