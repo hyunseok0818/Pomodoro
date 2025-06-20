@@ -4,11 +4,7 @@
   align-items: center;
   justify-content: center;
   height: 100%;
-  padding-bottom: 40px;
-}
-
-.circle {
-  transform: rotate(0deg);
+  padding-bottom: 25px;
 }
 
 .outcircle {
@@ -28,13 +24,20 @@
 }
 
 .cycle-box {
-  margin-top: 20px;
-  padding: 10px 20px;
-  border: 3px solid #fdd835;
-  background-color: #fff;
   color: #fdd835;
   font-size: 20px;
-  font-weight: bold;
-  border-radius: 8px;
-  user-select: none;
+  font-weight: 500;
+}
+
+.circle {
+  transform: rotate(0deg);
+}
+
+/* 다크모드 스타일 */
+.dark-mode .outcircle {
+  stroke: white;
+}
+
+.dark-mode .timetext {
+  fill: white;
 }
