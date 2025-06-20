@@ -79,13 +79,13 @@
 
 /* 버튼 공통 스타일 */
 .btn {
-  padding: 8px 17px;
+  padding: 10px 20px;
   border-radius: 6px;
-  font-size: 23px;
-  font-weight: 560;
+  font-size: 20px;
+  font-weight: bold;
   cursor: pointer;
   min-width: 90px;
-  border: 1px solid;
+  border: 3px solid;
   transition: all 0.2s ease;
 }
 
@@ -97,29 +97,29 @@
 }
 
 .start:hover {
-  background: #f0fdf4;
+  background: #defce7;
 }
 
 /* 정지 버튼 - 연한 분홍색 */
 .stop {
   background: #fef2f2;
   color: #f87171;
-  border-color: #fecaca;
+  border-color: #f87171;
 }
 
 .stop:hover {
-  background: #fee2e2;
+  background: #fdd2d2;
 }
 
 /* 초기화 버튼 - 회색 */
 .reset {
   background: white;
-  color: #9ca3af;
-  border-color: #d1d5db;
+  color: #9a9a9a;
+  border-color: #9a9a9a;
 }
 
 .reset:hover {
-  background: #f9fafb;
+  background: #d8d8d8;
 }
 
 /* 반응형 */

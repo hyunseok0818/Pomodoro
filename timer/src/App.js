@@ -27,7 +27,7 @@ function App() {
         </p>
       </header>
 
-      {/* 타이머 영역 (추후 구현) */}
+      {/* 타이머 영역 */}
       <div className="timer-area">
         <Timer />
       </div>
