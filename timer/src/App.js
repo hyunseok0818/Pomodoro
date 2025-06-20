@@ -9,7 +9,13 @@ function App() {
     <div className={mode === "dark" ? "App dark-mode" : "App light-mode"}>
       {/* 헤더 */}
       <header className="header">
-        <h1 className="title">365 뽀모도로</h1>
+        <h1
+          className="title"
+          style={{ cursor: "pointer" }}
+          onClick={() => window.location.reload()}
+        >
+          365 뽀모도로
+        </h1>
         <p className="mode-toggle">
           <span
             className={mode === "light" ? "mode-btn active" : "mode-btn"}
