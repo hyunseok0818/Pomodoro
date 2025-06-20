@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./App.css";
-import Timer from "./timer.js";
+import Timer from "./component/Timer.js";
 
 function App() {
   const [mode, setMode] = useState("light");
@@ -33,7 +33,7 @@ function App() {
         </p>
       </header>
 
-      {/* 타이머 영역 */}
+      {/* 타이머 */}
       <div className="timer-area">
         <Timer />
       </div>
