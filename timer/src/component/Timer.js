@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import "../timer.css";
+import "./timer.css";
 
 // 기존: 내부에서 running 상태 관리
 // function Timer() {
