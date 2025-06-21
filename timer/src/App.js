@@ -1,9 +1,24 @@
 import React, { useState } from "react";
 import "./App.css";
 import Timer from "./component/Timer.js";
+import Button from "./component/Button.js";
 
 function App() {
   const [mode, setMode] = useState("light");
+
+  // 타이머 상태를 App에서 관리하도록 추가
+  const [isRunning, setIsRunning] = useState(false); // 추가
+  const [isPaused, setIsPaused] = useState(false); // 추가
+
+  // 타이머 초기화용 상태 추가
+  const [resetFlag, setResetFlag] = useState(false); // 추가
+
+  // 초기화 함수 (타이머 시간, 사이클까지 모두 초기화)
+  const handleResetAll = () => {
+    setIsRunning(false);
+    setIsPaused(false);
+    setResetFlag((prev) => !prev); // resetFlag를 토글해서 Timer에 신호 전달
+  };
 
   return (
     <div className={mode === "dark" ? "App dark-mode" : "App light-mode"}>
@@ -34,15 +49,29 @@ function App() {
       </header>
 
       {/* 타이머 */}
-      <div className="timer-area">
-        <Timer />
+      <div className="timer">
+        {/* <Timer /> */}
+        {/* ↓ App에서 관리하는 상태를 props로 전달 */}
+        <Timer
+          isRunning={isRunning}
+          isPaused={isPaused}
+          setIsRunning={setIsRunning}
+          setIsPaused={setIsPaused}
+          resetFlag={resetFlag} // 추가
+        />
       </div>
 
       {/* 버튼 그룹 */}
-      <div className="buttons">
-        <button className="btn start">시작</button>
-        <button className="btn stop">정지</button>
-        <button className="btn reset">초기화</button>
+      <div className="button">
+        {/* <Button /> */}
+        {/* ↓ App에서 관리하는 상태와 초기화 함수를 props로 전달 */}
+        <Button
+          isRunning={isRunning}
+          isPaused={isPaused}
+          setIsRunning={setIsRunning}
+          setIsPaused={setIsPaused}
+          onReset={handleResetAll} // 추가
+        />
       </div>
     </div>
   );
