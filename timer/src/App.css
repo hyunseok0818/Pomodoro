@@ -7,7 +7,7 @@
 
 /* 다크모드 스타일 */
 .dark-mode {
-  background-color: #000000;
+  background-color: #222;
   color: white;
 }
 
@@ -61,6 +61,22 @@
 .dark-mode .btn {
   background-color: #000;
   color: white;
+}
+
+.mode-btn {
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 4px;
+}
+
+.mode-btn.active {
+  background-color: #444;
+  color: white;
+}
+
+.light-mode .mode-btn.active {
+  background-color: #bab7b7;
+  color: black;
 }
 
 /* 시작 버튼 - 초록색 테두리 */
