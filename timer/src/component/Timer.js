@@ -4,42 +4,87 @@ import "./timer.css";
 // 기존: 내부에서 running 상태 관리
 // function Timer() {
 //   const [running, setRunning] = useState(true);
-
 function Timer({ isRunning, isPaused, setIsRunning, setIsPaused, resetFlag }) {
-  // props로 상태와 resetFlag 받기
   const TIMES = { work: 25 * 60, rest: 5 * 60 };
   const [mode, setMode] = useState("work");
   const [time, setTime] = useState(TIMES.work);
-  const [cycle, setCycle] = useState(0);
 
-  // resetFlag가 바뀔 때마다 타이머와 사이클 초기화
+  const [cycle, setCycle] = useState(() => {
+    const savedCycle = localStorage.getItem("pomodoroCycle");
+    return savedCycle ? Number(savedCycle) : 0;
+  });
+
+  // startTime: 타이머가 시작된 절대 기준 시각
+  const [startTime, setStartTime] = useState(() => {
+    const savedStart = localStorage.getItem("pomodoroStartTime");
+    return savedStart ? Number(savedStart) : null;
+  });
+
+  // resetFlag가 true일 때만 초기화
   useEffect(() => {
-    setMode("work");
-    setTime(TIMES.work);
-    setCycle(0);
+    if (resetFlag) {
+      setMode("work");
+      setTime(TIMES.work);
+      setCycle(0);
+      setStartTime(null);
+      localStorage.setItem("pomodoroCycle", "0");
+      localStorage.setItem("pomodoroStartTime", "");
+    }
   }, [resetFlag]);
 
+  // isRunning이 true로 바뀔 때
   useEffect(() => {
-    if (!isRunning) return; // running → isRunning으로 변경
+    if (!isRunning) return;
 
-    if (time === 0) {
-      const next = mode === "work" ? "rest" : "work";
-      setMode(next);
-      setTime(TIMES[next]);
-
-      if (mode === "rest") {
-        setCycle((prev) => prev + 1);
-      }
-
-      return;
+    if (startTime === null) {
+      // 리셋 버튼을 누르면, 지금 시간으로 startTime 세팅
+      const now = Date.now();
+      setStartTime(now);
+      localStorage.setItem("pomodoroStartTime", now.toString());
+    } else {
+      // 정지 후 다시 시작하는 경우
+      // startTime 보정해서 다시 설정
+      const now = Date.now();
+      const adjustedStart = now - (TIMES[mode] - time) * 1000;
+      setStartTime(adjustedStart);
+      localStorage.setItem("pomodoroStartTime", adjustedStart.toString());
     }
+  }, [isRunning]);
 
-    const timerId = setInterval(() => {
-      setTime((t) => t - 1);
+  useEffect(() => {
+    if (!isRunning) return;
+    if (startTime === null) return; // startTime 없으면 대기
+
+    const interval = setInterval(() => {
+      const now = Date.now();
+      const elapsed = Math.floor((now - startTime) / 1000);
+      const total = TIMES[mode];
+      const remaining = total - elapsed;
+
+      if (remaining <= 0) {
+        const nextMode = mode === "work" ? "rest" : "work";
+        setMode(nextMode);
+
+        const newStart = Date.now();
+        setStartTime(newStart);
+        localStorage.setItem("pomodoroStartTime", newStart.toString());
+
+        if (mode === "rest") {
+          setCycle((prev) => {
+            const newCycle = prev + 1;
+            localStorage.setItem("pomodoroCycle", newCycle.toString());
+            return newCycle;
+          });
+        }
+
+        setTime(TIMES[nextMode]);
+      } else {
+        setTime(remaining);
+      }
     }, 1000);
 
-    return () => clearInterval(timerId);
-  }, [isRunning, time, mode]); // running → isRunning
+    return () => clearInterval(interval);
+  }, [isRunning, mode, startTime]);
 
   const format = (t) =>
     `${String(Math.floor(t / 60)).padStart(2, "0")}:${String(t % 60).padStart(
