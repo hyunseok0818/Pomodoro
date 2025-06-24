@@ -1,11 +1,11 @@
 import React, { useState, useEffect, useRef } from "react";
 import "./timer.css";
 
+const TIMES = { work: 25 * 60, rest: 5 * 60 };
 // 기존: 내부에서 running 상태 관리
 // function Timer() {
 //   const [running, setRunning] = useState(true);
 function Timer({ isRunning, isPaused, setIsRunning, setIsPaused, resetFlag }) {
-  const TIMES = { work: 25 * 60, rest: 5 * 60 };
   const [mode, setMode] = useState("work");
   const [time, setTime] = useState(TIMES.work);
 
@@ -33,7 +33,7 @@ function Timer({ isRunning, isPaused, setIsRunning, setIsPaused, resetFlag }) {
       localStorage.setItem("pomodoroCycle", "0");
       localStorage.setItem("pomodoroStartTime", "");
     }
-  }, [TIMES.work, resetFlag]);
+  }, [resetFlag]);
 
   // isRunning이 true로 바뀔 때
   useEffect(() => {
@@ -52,7 +52,7 @@ function Timer({ isRunning, isPaused, setIsRunning, setIsPaused, resetFlag }) {
       setStartTime(adjustedStart);
       localStorage.setItem("pomodoroStartTime", adjustedStart.toString());
     }
-  }, [TIMES, mode, startTime, time, isRunning]);
+  }, [mode, startTime, time, isRunning]);
 
   useEffect(() => {
     if (!isRunning) return;
@@ -93,7 +93,7 @@ function Timer({ isRunning, isPaused, setIsRunning, setIsPaused, resetFlag }) {
     }, 1000);
 
     return () => clearInterval(interval);
-  }, [TIMES, isRunning, mode, startTime]);
+  }, [isRunning, mode, startTime]);
 
   const format = (t) =>
     `${String(Math.floor(t / 60)).padStart(2, "0")}:${String(t % 60).padStart(
