@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import "./timer.css";
 
 // 기존: 내부에서 running 상태 관리
@@ -19,6 +19,9 @@ function Timer({ isRunning, isPaused, setIsRunning, setIsPaused, resetFlag }) {
     const savedStart = localStorage.getItem("pomodoroStartTime");
     return savedStart ? Number(savedStart) : null;
   });
+
+  // 알림 소리 ref 추가
+  const audioRef = useRef(null);
 
   // resetFlag가 true일 때만 초기화
   useEffect(() => {
@@ -62,6 +65,12 @@ function Timer({ isRunning, isPaused, setIsRunning, setIsPaused, resetFlag }) {
       const remaining = total - elapsed;
 
       if (remaining <= 0) {
+        // 소리 재생 추가
+        if (audioRef.current) {
+          audioRef.current.currentTime = 0;
+          audioRef.current.play();
+        }
+
         const nextMode = mode === "work" ? "rest" : "work";
         setMode(nextMode);
 
@@ -94,6 +103,8 @@ function Timer({ isRunning, isPaused, setIsRunning, setIsPaused, resetFlag }) {
 
   return (
     <div className="incircle">
+      {/* 알림 소리 오디오 태그 추가 */}
+      <audio ref={audioRef} src="/alarm.mp3" preload="auto" />
       <svg className="circle" width="533" height="533" viewBox="0 0 533 533">
         <circle className="outcircle" cx="266.5" cy="266.5" r="240" />
         <text className="timetext" x="266.5" y="276.5" textAnchor="middle">
