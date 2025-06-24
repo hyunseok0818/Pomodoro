@@ -100,6 +100,9 @@ function Timer({ isRunning, isPaused, setIsRunning, setIsPaused, resetFlag }) {
           {format(time)}
         </text>
       </svg>
+      <p className={mode === "work" ? "mode-text work" : "mode-text rest"}>
+        {mode === "work" ? "🔥 집중모드" : "🛌 휴식모드"}
+      </p>
       <div className="cycle-box">순환 횟수: {cycle}</div>
     </div>
   );

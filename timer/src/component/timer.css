@@ -23,8 +23,20 @@
   font-family: sans-serif;
 }
 
+.mode-text.work {
+  font-size: 30px;
+  font-weight: bold;
+  color: rgb(200, 84, 84);
+}
+
+.mode-text.rest {
+  font-size: 30px;
+  font-weight: bold;
+  color: rgb(112, 112, 241);
+}
+
 .cycle-box {
-  color: #fdd835;
+  color: #ffd000;
   font-size: 20px;
   font-weight: 500;
 }
