@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import "./timer.css";
 
-const TIMES = { work: 0.1 * 60, rest: 5 * 60 };
+const TIMES = { work: 25 * 60, rest: 5 * 60 };
 // 기존: 내부에서 running 상태 관리
 // function Timer() {
 //   const [running, setRunning] = useState(true);
