@@ -33,7 +33,7 @@ function Timer({ isRunning, isPaused, setIsRunning, setIsPaused, resetFlag }) {
       localStorage.setItem("pomodoroCycle", "0");
       localStorage.setItem("pomodoroStartTime", "");
     }
-  }, [resetFlag]);
+  }, [TIMES.work, resetFlag]);
 
   // isRunning이 true로 바뀔 때
   useEffect(() => {
@@ -52,7 +52,7 @@ function Timer({ isRunning, isPaused, setIsRunning, setIsPaused, resetFlag }) {
       setStartTime(adjustedStart);
       localStorage.setItem("pomodoroStartTime", adjustedStart.toString());
     }
-  }, [isRunning]);
+  }, [TIMES, mode, startTime, time, isRunning]);
 
   useEffect(() => {
     if (!isRunning) return;
@@ -93,7 +93,7 @@ function Timer({ isRunning, isPaused, setIsRunning, setIsPaused, resetFlag }) {
     }, 1000);
 
     return () => clearInterval(interval);
-  }, [isRunning, mode, startTime]);
+  }, [TIMES, isRunning, mode, startTime]);
 
   const format = (t) =>
     `${String(Math.floor(t / 60)).padStart(2, "0")}:${String(t % 60).padStart(
