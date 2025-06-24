@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Helmet } from "react-helmet";
 import "./App.css";
 import Timer from "./component/Timer.js";
 import Button from "./component/Button.js";
@@ -23,6 +24,9 @@ function App() {
   return (
     <div className={mode === "dark" ? "App dark-mode" : "App light-mode"}>
       {/* 헤더 */}
+      <Helmet>
+        <title>365뽀모도로</title>
+      </Helmet>
       <header className="header">
         <h1
           className="title"
